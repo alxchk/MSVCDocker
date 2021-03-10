@@ -69,7 +69,7 @@ If ($msvc_ver -eq "9") {
     $vcvars32="`"$vcvarsbat`" x86"
     $vcvars64="`"$vcvarsbat`" amd64"
 } ElseIf ($msvc_ver -eq "15") {
-    choco install -y visualcpp-build-tools --version 15.0.26228.20170424
+    choco install -y visualcpp-build-tools --version 15.0.26228.20170424 --package-parameters="--nocache"
 
     $vcvars32="`"$programFilesX86\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars32.bat`""
     $vcvars64="`"$programFilesX86\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat`""

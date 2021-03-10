@@ -1,5 +1,5 @@
 MSVC_VERS = 16 15 14 12 11 10 9
-WINE_VER = 4.0
+WINE_VER ?= debian
 DOCKERCMD = docker
 VAGRANTCMD = vagrant
 VAGRANTARGS = 
@@ -10,7 +10,7 @@ define build-targets
 		$(VAGRANTCMD) halt win-msvc$1
 
   buildmsvc$1: Dockerfile dockercheck
-		$(DOCKERCMD) build -f Dockerfile -t msvc:$1 --build-arg WINE_VER=$(WINE_VER) --build-arg MSVC=$1 .
+		$(DOCKERCMD) build --squash --rm -f Dockerfile.slim -t msvc:$1 --build-arg WINE_VER=$(WINE_VER) --build-arg MSVC=$1 .
 
   msvc$1: dockercheck buildsnapshot$1 buildwine buildmsvc$1
 endef
@@ -32,4 +32,4 @@ setupbasebox: ./vagranttools/setupbasebox.sh
 	./vagranttools/setupbasebox.sh
 
 buildwine: Dockerfile.wine dockercheck
-	$(DOCKERCMD) build -f Dockerfile.wine -t wine:$(WINE_VER) --build-arg WINE_VER=$(WINE_VER) .
+	$(DOCKERCMD) build --squash --rm -f Dockerfile.wine-slim -t wine:$(WINE_VER) --build-arg WINE_VER=$(WINE_VER) .

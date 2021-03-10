@@ -9,4 +9,9 @@ if [ ! -d "$WINEPREFIX" ]; then
 fi
 
 # call through to the exe
-/opt/wine-stable/bin/`basename $0` "$@"
+
+if [ -x "/opt/wine-stable/bin/`basename $0`" ]; then
+    exec /opt/wine-stable/bin/`basename $0` "$@"
+else
+    /usr/bin/`basename $0` "$@"
+fi

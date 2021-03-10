@@ -63,7 +63,7 @@ If ($regdiffHash -eq $regdiffExpectedHash) {
 $subinaclName="subinacl.msi"
 $subinaclArchive="$subinaclName"
 $subinaclArchivePath="C:\Windows\Temp\$subinaclArchive"
-$subinaclUrl="https://web.archive.org/web/20190830103837/https://download.microsoft.com/download/1/7/d/17d82b72-bc6a-4dc8-bfaa-98b37b22b367/$subinaclArchive"
+$subinaclUrl="https://web.archive.org/web/20190910062448if_/http://download.microsoft.com/download/1/7/d/17d82b72-bc6a-4dc8-bfaa-98b37b22b367/$subinaclName"
 echo $subinaclUrl
 (New-Object System.Net.WebClient).DownloadFile($subinaclUrl, $subinaclArchivePath)
 $subinaclHash = (Get-FileHash $subinaclArchivePath -Algorithm MD5).Hash
